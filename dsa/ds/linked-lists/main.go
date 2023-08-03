@@ -83,10 +83,22 @@ func (ll *LinkedList) DeleteLast() int {
 }
 
 func (ll *LinkedList) DeleteIndex(index int) int {
-	node := ll.Get(index-1)
+	node := ll.Get(index - 1)
 	val := node.Next.Val
 	node.Next = node.Next.Next
 	return val
+}
+
+func (ll *LinkedList) Reverse() {
+	var prev *Node
+	curr := ll.head
+    for curr != nil {
+        next := curr.Next
+        curr.Next = prev
+        prev = curr
+        curr = next
+    }
+    ll.head = prev
 }
 
 func main() {
@@ -105,5 +117,7 @@ func main() {
 	ll.InsertLast(60)
 	ll.Display()
 	ll.DeleteIndex(2)
+	ll.Display()
+	ll.Reverse()
 	ll.Display()
 }
